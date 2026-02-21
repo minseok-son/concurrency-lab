@@ -16,7 +16,7 @@ Establishing a baseline duration and ensuring logic correctness before introduci
 | **Average Duration** | 0.00451s |
 | **Expected Value** | 1,000,000 |
 | **Actual Value** | 1,000,000 |
-| **Integrity** | ✅ **PASS** |
+| **Status** | ✅ **PASS** |
 
 ### Multi-Threaded Performance (The Failure)
 When scaled to two threads, the implementation suffers from two primary systems-level failures:
@@ -46,7 +46,7 @@ While correctness is achieved, we observe a **~35x performance penalty** compare
 
 
 
-| Iteration | Duration (s) | Expected | Actual | Integrity |
+| Iteration | Duration (s) | Actual Value | Expected Value | Status |
 | :--- | :--- | :--- | :--- | :--- |
 | 1 | 0.1753s | 2,000,000 | 2,000,000 | ✅ **PASS** |
 | 2 | 0.1514s | 2,000,000 | 2,000,000 | ✅ **PASS** |
