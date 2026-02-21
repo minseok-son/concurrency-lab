@@ -2,6 +2,7 @@
 #include <vector>
 #include <thread>
 #include "../include/linkedlist/NaiveLinkedList.h"
+#include "../include/linkedlist/LockLinkedList.h"
 
 int main(int argc, char* argv[]) {
     if (argc < 3) {
@@ -20,7 +21,8 @@ int main(int argc, char* argv[]) {
     }
 
     const int ops_per_thread = 100'000;
-    LinkedList list;
+    // LinkedList list;
+    LockLinkedList list;
 
     auto start = std::chrono::high_resolution_clock::now();
 

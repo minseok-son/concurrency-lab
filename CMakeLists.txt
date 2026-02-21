@@ -23,6 +23,7 @@ add_library(counters_lib
 # 2. The LinkedList Library
 add_library(ll_lib 
     src/linkedlist/NaiveLinkedList.cpp
+    src/linkedlist/LockLinkedList.cpp
 )
 
 # 3. Link only what you need
