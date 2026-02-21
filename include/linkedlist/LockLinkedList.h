@@ -4,7 +4,7 @@
 
 class LockLinkedList {
 public:
-    LockLinkedList() = default;
+    LockLinkedList() : head_(new Node(0)), size_(0) {};
     ~LockLinkedList();
 
     void pushFront(int val);

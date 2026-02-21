@@ -19,10 +19,10 @@ void LockLinkedList::pushFront(int val) {
 
 void LockLinkedList::popFront() {
     std::unique_lock<std::mutex> lock(mtx_);
-    if (head_ == nullptr) return;
+    if (head_->next == nullptr) return;
     Node* toDelete = head_->next;
     head_->next = toDelete->next;
-    delete(toDelete);
+    delete toDelete;
     size_--;
 };
 
