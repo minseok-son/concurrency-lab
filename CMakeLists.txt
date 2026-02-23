@@ -26,9 +26,16 @@ add_library(ll_lib
     src/linkedlist/LockLinkedList.cpp
 )
 
+add_library(q_lib
+    src/queue/Queue.cpp
+)
+
 # 3. Link only what you need
 add_executable(counter_bench benchmarks/counter_bench.cpp)
 target_link_libraries(counter_bench counters_lib pthread)
 
 add_executable(ll_bench benchmarks/linkedlist_bench.cpp)
 target_link_libraries(ll_bench ll_lib pthread)
+
+add_executable(q_bench benchmarks/queue_bench.cpp)
+target_link_libraries(q_bench q_lib pthread)

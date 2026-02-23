@@ -1,6 +1,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 #include <mutex>
+#include <atomic>
 
 class Queue {
 public:
@@ -13,6 +14,7 @@ public:
 
     void enqueue(int val);
     int dequeue();
+    int get_size() const;
 
 private:
     struct Node {
@@ -20,11 +22,13 @@ private:
         Node* next = nullptr;
         Node(int v) : val(v) {}
     };
-    Node* head_;
+    alignas(64) Node* head_;
     std::mutex head_lock_;
 
-    Node* tail_;
+    alignas(64) Node* tail_;
     std::mutex tail_lock_;
+    
+    alignas(64) std::atomic<int> size_{0};
 };
 
 #endif
