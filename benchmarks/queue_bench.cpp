@@ -2,6 +2,7 @@
 #include <vector>
 #include <thread>
 #include "../include/queue/Queue.h"
+#include "../include/queue/BoundedBuffer.h"
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
@@ -11,33 +12,34 @@ int main(int argc, char* argv[]) {
 
     int num_threads = std::stoi(argv[1]);
     const int NUM_OPS = 1'000'000;
-    Queue queue;
-    
+    // Queue queue;
+    BoundedBuffer queue;
+    queue.print_address();
     auto start = std::chrono::high_resolution_clock::now();
-    std::vector<std::thread> enqueue_threads;
-    std::vector<std::thread> dequeue_threads;
+    std::vector<std::thread> producer;
+    std::vector<std::thread> consumer;
 
     for (int i = 0; i < num_threads; ++i) {
-        enqueue_threads.emplace_back([&queue, NUM_OPS]() {
+        producer.emplace_back([&queue, NUM_OPS]() {
             for (int j = 0; j < NUM_OPS; ++j) {
-                queue.enqueue(j);
+                queue.produce(j);
             }
         });
     }
 
     for (int i = 0; i < num_threads; ++i) {
-        dequeue_threads.emplace_back([&queue, NUM_OPS]() {
+        consumer.emplace_back([&queue, NUM_OPS]() {
             for (int j = 0; j < NUM_OPS; ++j) {
-                queue.dequeue();
+                queue.consume();
             }
         });
     }
 
-    for (auto& t : enqueue_threads) {
+    for (auto& t : producer) {
         t.join();
     }
 
-    for (auto& t : dequeue_threads) {
+    for (auto& t : consumer) {
         t.join();
     }
 

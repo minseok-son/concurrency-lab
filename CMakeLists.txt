@@ -28,6 +28,7 @@ add_library(ll_lib
 
 add_library(q_lib
     src/queue/Queue.cpp
+    src/queue/BoundedBuffer.cpp
 )
 
 # 3. Link only what you need
